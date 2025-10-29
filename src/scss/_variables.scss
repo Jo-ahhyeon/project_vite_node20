@@ -1,0 +1,102 @@
+
+:root {
+  --font-body-family: 'Pretendard', 'Inter', 'Noto Sans KR', sans-serif;
+}
+
+:root {
+  --main-primary: #3C4A3E;
+  --serve-color: #E9E5DA;
+  --serve-color2: #F5F1EB;
+  --text-black: #000000;
+  --text-white: #ffffff;
+
+/* 🔠 Typography (Mobile Default) */
+  --typo-title-size: 32px;
+  --typo-sub-size: 24px;
+  --typo-lg-size: 18px;
+  --typo-sm-size: 14px;
+  --typo-button-size: 16px;
+
+  --typo-title-lineheight: 36px;
+  --typo-sub-lineheight: 30px;
+  --typo-lg-lineheight: 28px;
+  --typo-sm-lineheight: 22px;
+  --typo-button-lineheight: 24px;
+
+  /* 📏 Spacing */
+  --spacing-xl: 30px;
+  --spacing-lg: 20px;
+  --spacing-md: 12px;
+  --spacing-sm: 8px;
+
+  /* 🎯 Border & Radius */
+  --radius-30: 30px;
+  --radius-50: 50px;
+  --border-w: 1px;
+}
+
+/* Tablet (768px 이상) */
+@media (min-width: 768px) {
+  :root {
+    --typo-title-size: 48px;
+    --typo-sub-size: 32px;
+    --typo-lg-size: 20px;
+    --typo-sm-size: 16px;
+    --typo-button-size: 18px;
+
+    --typo-title-lineheight: 50px;
+    --typo-sub-lineheight: 38px;
+    --typo-lg-lineheight: 28px;
+    --typo-sm-lineheight: 24px;
+    --typo-button-lineheight: 26px;
+
+    --spacing-xl: 48px;
+    --spacing-lg: 24px;
+    --spacing-md: 12px;
+    --spacing-sm: 8px;
+  }
+}
+
+/* Laptop (1080px 이상) */
+@media (min-width: 1080px) {
+  :root {
+    --typo-title-size: 64px;
+    --typo-sub-size: 42px;
+    --typo-lg-size: 24px;
+    --typo-sm-size: 16px;
+    --typo-button-size: 20px;
+
+    --typo-title-lineheight: 56px;
+    --typo-sub-lineheight: 42px;
+    --typo-lg-lineheight: 34px;
+    --typo-sm-lineheight: 24px;
+    --typo-button-lineheight: 28px;
+
+    --spacing-xl: 64px;
+    --spacing-lg: 32px;
+    --spacing-md: 16px;
+    --spacing-sm: 8px;
+  }
+}
+
+/* Desktop (1450px 이상) */
+@media (min-width: 1450px) {
+  :root {
+    --typo-title-size: 78px;
+    --typo-sub-size: 48px;
+    --typo-lg-size: 28px;
+    --typo-sm-size: 18px;
+    --typo-button-size: 25px;
+
+    --typo-title-lineheight: 56px;
+    --typo-sub-lineheight: 50px;
+    --typo-lg-lineheight: 50px;
+    --typo-sm-lineheight: 28px;
+    --typo-button-lineheight: 30px;
+
+    --spacing-xl: 100px;
+    --spacing-lg: 50px;
+    --spacing-md: 30px;
+    --spacing-sm: 15px;
+  }
+}
