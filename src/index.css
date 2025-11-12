@@ -9,5 +9,5 @@
 
 
 body {
-   font-family: var(--font-body-family);
+   font-family: var(--font-body-family), (sans-serif);
 }

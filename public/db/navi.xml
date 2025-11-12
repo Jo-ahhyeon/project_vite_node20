@@ -1,0 +1,24 @@
+<navi>
+    <menu>
+        <item>
+            <title>서비스소개</title>
+            <link>/Service</link>
+        </item>
+        <item>
+            <title>시설안내</title>
+            <link>/Facility</link>
+        </item>
+        <item>
+            <title>예약</title>
+            <link>/Reservation</link>
+        </item>
+        <item>
+            <title>후기</title>
+            <link>/Review</link>
+        </item>
+        <item>
+            <title>문의</title>
+            <link>/Contact</link>
+        </item>
+    </menu>
+</navi>

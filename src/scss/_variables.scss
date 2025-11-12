@@ -11,13 +11,13 @@
   --text-white: #ffffff;
 
 /* 🔠 Typography (Mobile Default) */
-  --typo-title-size: 32px;
-  --typo-sub-size: 24px;
-  --typo-lg-size: 18px;
+  --typo-title-size: 30px;
+  --typo-sub-size: 30px;
+  --typo-lg-size: 15x;
   --typo-sm-size: 14px;
   --typo-button-size: 16px;
 
-  --typo-title-lineheight: 36px;
+  --typo-title-lineheight: 38px;
   --typo-sub-lineheight: 30px;
   --typo-lg-lineheight: 28px;
   --typo-sm-lineheight: 22px;
@@ -85,14 +85,14 @@
     --typo-title-size: 78px;
     --typo-sub-size: 48px;
     --typo-lg-size: 28px;
-    --typo-sm-size: 18px;
+    --typo-sm-size: 20px;
     --typo-button-size: 25px;
 
-    --typo-title-lineheight: 56px;
-    --typo-sub-lineheight: 50px;
+    --typo-title-lineheight: 100px;
+    --typo-sub-lineheight: auto;
     --typo-lg-lineheight: 50px;
-    --typo-sm-lineheight: 28px;
-    --typo-button-lineheight: 30px;
+    --typo-sm-lineheight: 33px;
+    --typo-button-lineheight: auto;
 
     --spacing-xl: 100px;
     --spacing-lg: 50px;
