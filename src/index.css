@@ -2,12 +2,18 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
 @import "./scss/_variables.scss";
+@import "./scss/global.scss";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 
 
-body {
-   font-family: var(--font-body-family), (sans-serif);
-}
+body {font-family: var(--font-body-family);}
+
+/* section {
+  padding-inline: var(--section-padding-mobile);
+  @media (min-width: 1024px) {
+    padding-inline: var(--section-padding-desktop);
+  }
+} */

@@ -37,6 +37,7 @@ export default {
       fontSize: {
         title: ["var(--typo-title-size)", { lineHeight: "var(--typo-title-lineheight)" }],
         sub: ["var(--typo-sub-size)", { lineHeight: "var(--typo-sub-lineheight)" }],
+        xl: ["var(--typo-xl-size)", { lineHeight: "var(--typo-xl-lineheight)" }],
         lg: ["var(--typo-lg-size)", { lineHeight: "var(--typo-lg-lineheight)" }],
         sm: ["var(--typo-sm-size)", { lineHeight: "var(--typo-sm-lineheight)" }],
         button: ["var(--typo-button-size)", { lineHeight: "var(--typo-button-lineheight)" }],
@@ -45,7 +46,6 @@ export default {
         primary: [
           "Inter",
           "Pretendard",
-          "Noto Sans KR",
           "sans-serif",
         ],
         body: ["var(--font-body-family)", "sans-serif"],
