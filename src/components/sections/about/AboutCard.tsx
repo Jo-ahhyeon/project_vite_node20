@@ -10,7 +10,7 @@ interface AboutCardProps {
 
 const AboutCard: React.FC<AboutCardProps> = ({ titleEn, titleKo, img, link }) => {
   return (
-    <div className="relative overflow-hidden bg-black group">
+    <div className="relative overflow-hidden bg-black group about-card">
       <img
         src={img}
         alt={titleKo}
@@ -24,12 +24,12 @@ const AboutCard: React.FC<AboutCardProps> = ({ titleEn, titleKo, img, link }) =>
           <p className="text-sm font-light opacity-80">{titleEn}</p>
           <h3 className="text-xl font-bold mt-2">{titleKo}</h3>
         </div>
-        
 
         <Link
           to={link}
-          className="w-10 mt-5 inline-flex items-center gap-2 text-lg font-medium border-b border-transparent hover:border-white transition">
-          <img src={Arrow} alt="arrow"/>
+          className="w-10 mt-5 inline-flex items-center gap-2 text-lg font-medium border-b border-transparent hover:border-white transition"
+        >
+          <img src={Arrow} alt="arrow" />
         </Link>
       </div>
     </div>

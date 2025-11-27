@@ -18,7 +18,7 @@ export default function Partnership() {
   const sentences = [
     "다양한 기업들과",
     "안전하게 믿을 수 있는",
-    "이상의 가치를 제공합니다.",
+    "특별한 경험",
   ];
 
   useGSAP(() => {

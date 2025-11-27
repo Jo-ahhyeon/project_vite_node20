@@ -27,6 +27,15 @@ export default {
         md: "var(--spacing-md)",
         sm: "var(--spacing-sm)",
       },
+      letterSpacing: {
+        tighter: '-0.5px',
+        tight: '-0.25px',
+        normal: '0',
+        wide: '1px',
+        wider: '2px',
+        widest: '4px',
+        hero: '6px', // 너가 원하는 값으로 커스텀
+      },
       borderRadius: {
         30: "var(--radius-30)",
         50: "var(--radius-50)",
@@ -60,6 +69,15 @@ export default {
         bold: "700",
         extrabold: "800",
         black: "900",
+      },
+      keyframes: {
+        rolling: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        rolling: "rolling 100s linear infinite",
       },
     },
   },

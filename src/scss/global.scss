@@ -48,3 +48,15 @@ header.header-dark {
   color: black;
   background-color: black;
 }
+@keyframes rolling-slow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-rolling-slow {
+  animation: rolling-slow 60s linear infinite;
+}
