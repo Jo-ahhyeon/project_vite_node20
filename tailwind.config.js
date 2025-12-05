@@ -12,6 +12,7 @@ export default {
         'container-xl': '1650px',
         'container-lg': '1450px',
         'container-md': '1200px',
+        'container-sm': '920px',
       },
     extend: {
       colors: {
@@ -20,6 +21,9 @@ export default {
         "serve-color2": "var(--serve-color2)",
         "black": "var(--text-black)",
         "white": "var(--text-white)",
+      },
+      flex: {
+        '2': '2 2 0%',
       },
       spacing: {
         xl: "var(--spacing-xl)",

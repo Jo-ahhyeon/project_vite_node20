@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -22,43 +22,40 @@ export default function Partnership() {
   ];
 
   useGSAP(() => {
-    if (window.innerWidth >= 1024) {
-      const sentenceEl = textRef.current;
-      if (!sentenceEl) return;
+  const sentenceEl = textRef.current;
+  if (!sentenceEl) return;
 
-      let index = 0;
+  let index = 0;
 
-      const showSentence = () => {
-        sentenceEl.textContent = sentences[index];
+  const showSentence = () => {
+    sentenceEl.textContent = sentences[index];
 
-        gsap.fromTo(
-          sentenceEl,
-          { opacity: 0, x: 30 },
-          { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }
-        );
+    gsap.fromTo(
+      sentenceEl,
+      { opacity: 0, x: 30 },
+      { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }
+    );
 
-        gsap.to(sentenceEl, {
-          opacity: 0,
-          x: -30,
-          delay: 1.5,
-          duration: 0.8,
-          ease: "power2.in",
-          onComplete: () => {
-            index = (index + 1) % sentences.length;
-            showSentence();
-          },
-        });
-      };
+    gsap.to(sentenceEl, {
+      opacity: 0,
+      x: -30,
+      delay: 1.5,
+      duration: 0.8,
+      ease: "power2.in",
+      onComplete: () => {
+        index = (index + 1) % sentences.length;
+        showSentence();
+      },
+    });
+  };
 
-      showSentence();
-    }
-  }, []);
+  showSentence();
+}, []);
 
   return (
-    <section className="w-full flex flex-col items-center justify-center bg-[url('/img/partnership.jpg')] bg-cover bg-center bg-no-repeat py-20 gap-xl">
+    <section className="w-full flex flex-col items-center justify-center bg-[url('/img/partnership.jpg')] bg-cover bg-center bg-no-repeat py-20 gap-xl min-h-screen lg:h-screen">
 
-         {/* 🔥 무한 자동 롤링 영역 (PC만) */}
-      <div className="hidden md:block w-full overflow-hidden">
+      <div className="hidden lg:block w-full overflow-hidden">
         <div className="partner-track">
           {[...partners, ...partners].map((logo, i) => (
             <img key={i} src={logo} className="h-18 object-contain" />
@@ -66,9 +63,9 @@ export default function Partnership() {
         </div>
       </div>
 
-      <div className="md:hidden grid grid-cols-2 gap-xl px-4">
+      <div className="lg:hidden grid grid-cols-2 gap-xl p-8 lg:px-2">
         {partners.map((logo, i) => (
-          <img key={i} src={logo} className="h-12 mx-auto object-contain" />
+          <img key={i} src={logo} className="lg:h-12 mx-auto object-contain" />
         ))}
       </div>
 

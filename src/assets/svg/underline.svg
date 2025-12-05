@@ -1,17 +1,24 @@
 <svg
-  width="300"
-  height="35"
-  viewBox="0 0 300 35"
+  id="underline-svg"
+  className="absolute left-20 -bottom-3 w-full h-[60px]"
+  viewBox="0 0 400 60"
   fill="none"
-  xmlns="http://www.w3.org/2000/svg">
+>
   <path
-    d="M5 20 C100 5, 200 35, 295 15"
-    stroke="#3C4A3E;"
-    stroke-width="6"
-    stroke-linecap="round" />
+    id="underline-path-1"
+    d="M5 20 C80 10, 220 10, 395 20"
+    stroke="#313F3680"
+    strokeWidth="10"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  />
+
   <path
-    d="M10 30 C120 10, 180 40, 290 25"
-    stroke="#3C4A3E;"
-    stroke-width="6"
-    stroke-linecap="round" />
+    id="underline-path-2"
+    d="M5 40 C120 30, 260 35, 395 40"
+    stroke="#313F3680"
+    strokeWidth="10"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  />
 </svg>

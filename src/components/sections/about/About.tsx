@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 import AboutCard from "./AboutCard";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -30,26 +30,43 @@ const About = () => {
   const cardsRef = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
-    const elements = cardsRef.current;
+  if (typeof window === "undefined" || window.innerWidth < 1080) return;
 
-    gsap.set(elements, { opacity: 0, y: 60 });
+  const ctx = gsap.context(() => {
+    const targets = cardsRef.current.filter(Boolean);
+    if (!targets.length) return;
 
-    gsap.to(elements, {
+    gsap.set(targets, { opacity: 0, y: 60 });
+
+    gsap.to(targets, {
       opacity: 1,
       y: 0,
       duration: 1,
-      stagger: 1,   // ← 딴 딴 딴 간격
+      stagger: 0.35,
       ease: "power3.out",
       scrollTrigger: {
-        trigger: "#about",
+        trigger: "#about-section",
         start: "top 80%",
-        toggleActions: "restart none none reset", 
+        toggleActions: "play none none none",
       },
     });
-  }, []);
+  });
+
+  // 중요!!! 이미지 로드 후 refresh
+  const handleLoad = () => {
+    ScrollTrigger.refresh();
+  };
+
+  window.addEventListener("load", handleLoad);
+
+  return () => {
+    window.removeEventListener("load", handleLoad);
+    ctx.revert();
+  };
+}, []);
 
   return (
-    <section id="about" className="w-full h-full">
+    <div id="about-section" className="w-full h-full">
       <div className="container1650 mx-auto grid grid-cols-1 md:grid-cols-3">
         {cards.map((card, index) => (
           <div
@@ -62,7 +79,7 @@ const About = () => {
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

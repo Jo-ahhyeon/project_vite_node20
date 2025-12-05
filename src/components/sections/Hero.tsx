@@ -1,17 +1,54 @@
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 
-import heroVideo from '../../assets/hero.mp4'
-import heroVideo2 from '../../assets/hero2.mp4'
+import "swiper/css";
+
+import heroVideo from "../../assets/hero.mp4";
+import heroimg from "../../../public/img/heroimg.jpg";
 
 export default function Hero() {
   return (
-     <section className="relative w-full h-screen overflow-hidden bg-black">
-      <video className="absolute opacity-80 top-0 left-0 w-full h-full object-cover"
-        src={heroVideo}
-        autoPlay
-        muted
-        loop
-        playsInline>
-      </video>
+    <section className="relative w-full h-screen bg-black overflow-hidden">
+
+      {/* 🔥 블랙 반투명 오버레이 */}
+      <div className="absolute inset-0 bg-black/40 z-[5]"></div>
+
+      <Swiper
+        modules={[Autoplay]}
+        autoplay={{
+          delay: 4000,
+          disableOnInteraction: false,
+        }}
+        loop={true}
+        speed={800}
+        className="w-full h-full"
+      >
+        {/* 🔥 슬라이드 1 — 비디오 */}
+        <SwiperSlide>
+          <video
+            className="w-full h-full object-cover opacity-70"
+            src={heroVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+          <h2 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-title z-10">
+            Animora
+          </h2>
+        </SwiperSlide>
+
+        {/* 🔥 슬라이드 2 — 이미지 */}
+        <SwiperSlide>
+          <img
+            src={heroimg}
+            alt="Hero Background"
+            className="w-full h-full object-cover opacity-70"
+          />
+        </SwiperSlide>
+      </Swiper>
+
+      
     </section>
-  )
+  );
 }

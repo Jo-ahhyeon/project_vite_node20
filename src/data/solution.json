@@ -1,0 +1,47 @@
+{
+  "slides": [
+    {
+      "id": 1,
+      "type": "select",
+      "question": "보호자분의 반려동물은 어떤 성격인가요?",
+      "options": [
+        "활발해요",
+        "낯가려요",
+        "순해요"
+      ],
+      "answerKey": "question1Answer"
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "question": "추가로 알려주실 특이사항이 있나요?",
+      "placeholder": "ex) 분리불안이 심해요. / 활동량이 많아요.",
+      "answerKey": "question2Text"
+    },
+    {
+      "id": 3,
+      "type": "form",
+      "question": "입력하신 정보로 반려동물에게 맞는 맞춤형 솔루션을 안내드려요.",
+      "fields": [
+        {
+          "name": "name",
+          "label": "성함",
+          "placeholder": "성함",
+          "type": "text"
+        },
+        {
+          "name": "contact",
+          "label": "연락처",
+          "placeholder": "연락처",
+          "type": "text"
+        },
+        {
+          "name": "petName",
+          "label": "반려동물 이름",
+          "placeholder": "반려동물 이름",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
