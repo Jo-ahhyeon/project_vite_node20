@@ -2,15 +2,8 @@
 html,body {height: 100%; scroll-behavior: smooth;}
 
 @media (min-width: 1080px) {
-  .fullpage {
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
+  .panel {
     height: 100vh;
-  }
-
-  .fullpage > section {
-    height: 100vh;  
-    scroll-snap-align: start;
   }
 }
 

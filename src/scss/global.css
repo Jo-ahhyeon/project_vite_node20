@@ -4,24 +4,23 @@ html, body {
   scroll-behavior: smooth;
 }
 
-@media (min-width: 1024px) {
-  html, body {
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-  }
-  section {
+@media (min-width: 1080px) {
+  .panel {
     height: 100vh;
-    scroll-snap-align: start;
   }
 }
 @media (max-width: 1023px) {
   section {
     height: auto;
   }
+  .hd-logo {
+    width: 150px;
+    height: auto;
+  }
 }
 .partner-track {
   display: flex;
-  gap: 10rem; /* 로고 간 간격 */
+  gap: 10rem;
   width: max-content;
   animation: scroll-left 90s linear infinite;
 }
@@ -34,7 +33,6 @@ html, body {
     transform: translateX(-50%); /* 두 배 채웠으므로 -50% 이동 */
   }
 }
-/* 모바일에서는 자동롤링 비활성화 */
 @media (max-width: 1023px) {
   .partner-track {
     animation: none;
@@ -43,11 +41,6 @@ html, body {
     gap: 1.5rem;
   }
 }
-header.header-dark {
-  color: black;
-  background-color: black;
-}
-
 @keyframes rolling-slow {
   0% {
     transform: translateX(0);
@@ -72,42 +65,15 @@ header.header-dark {
   background: url(/img/service.jpg) no-repeat center;
 }
 
-.review-pagination .swiper-pagination-bullet {
-  @apply bg-main-primary w-2 h-2;
-}
-
-.review-pagination .swiper-pagination {
-  gap: 1px;
-}
-
-@media (min-width: 1080px) {
-  .review-pagination .swiper-pagination-bullet {
-    @apply w-8 h-1 bg-gray-300 rounded-full opacity-50 transition-all;
-    border-radius: 0;
+@media (max-width: 1080px) {
+  .mobile-input-box {
+    width: 100%;
+    aspect-ratio: 0.8/0.6; /* 🔥 모바일에서 세로로 긴 박스 */
+    padding: 20px !important;
   }
-  .review-pagination .swiper-pagination-bullet-active {
-    @apply w-8 bg-[#3C4A3E80] opacity-100;
-    border-radius: 0;
-  }
-  .custom-swiper-pagination .swiper-pagination-bullet {
-    width: 35px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.5019607843); /* 흐린 흰색 */
-    opacity: 1;
-    border-radius: 0;
-  }
-  /* 활성화된 dot */
-  .custom-swiper-pagination .swiper-pagination-bullet-active {
-    background: rgba(60, 74, 62, 0.5019607843);
+  .mobile-input-box::placeholder {
+    white-space: pre-line; /* 자동 줄바꿈 */
+    line-height: 1.4;
+    opacity: 0.7;
   }
 }
-.custom-swiper-pagination {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 2px !important;
-  margin-top: 20px !important;
-  height: 20px !important;
-}
-
-/* 기본 dot 스타일 */
