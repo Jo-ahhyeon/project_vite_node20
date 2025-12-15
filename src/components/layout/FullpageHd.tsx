@@ -17,6 +17,8 @@ const Hd: React.FC<HdProps> = ({ cls }) => {
   const [navidata, setNavi] = useState<NaviItem[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const [isLightBg, setIsLightBg] = useState(false);
+
   // ⭐ 모바일 여부
   const [isMobile, setIsMobile] = useState(false);
 
@@ -52,13 +54,18 @@ const Hd: React.FC<HdProps> = ({ cls }) => {
    * ⭐ 모바일에서 스크롤 시 헤더 숨김/표시
    * ----------------------------- */
   useEffect(() => {
-    if (!isMobile) return;
+    if (!isMobile) return; // 데스크탑에서는 작동 안 함
 
     const handleScroll = () => {
       const current = window.scrollY;
 
-      if (current > lastScroll) setShowHeader(false);
-      else setShowHeader(true);
+      if (current > lastScroll) {
+        // 아래로 스크롤 → 헤더 숨김
+        setShowHeader(false);
+      } else {
+        // 위로 스크롤 → 헤더 표시
+        setShowHeader(true);
+      }
 
       setLastScroll(current);
     };
@@ -75,7 +82,7 @@ const Hd: React.FC<HdProps> = ({ cls }) => {
       try {
         const NAVI_URL = import.meta.env.PROD ? "/animora/db/navi.xml" : "/db/navi.xml";
         const response = await axios.get(NAVI_URL, { responseType: "text" });
-        
+
         const parser = new DOMParser();
         const xml = parser.parseFromString(response.data, "application/xml");
         const items = Array.from(xml.getElementsByTagName("item"));
@@ -96,9 +103,62 @@ const Hd: React.FC<HdProps> = ({ cls }) => {
     fetchNaviData();
   }, []);
 
+  /** -----------------------------
+   * ② 데스크탑 섹션 밝기 감지
+   * ----------------------------- */
+  useEffect(() => {
+    if (isMobile) return;
+
+    const sections = document.querySelectorAll("section[data-bg]");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        let best = null;
+        let minDistance = Infinity;
+
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const rect = entry.boundingClientRect;
+          const centerY = rect.top + rect.height / 2;
+          const viewportCenter = window.innerHeight / 2;
+          const distance = Math.abs(centerY - viewportCenter);
+
+          if (distance < minDistance) {
+            minDistance = distance;
+            best = entry.target;
+          }
+        });
+
+        if (best) {
+          const bg = (best as HTMLElement).getAttribute("data-bg");
+          setIsLightBg(bg === "light");
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, [isMobile]);
+
+  /** -----------------------------
+   * 최종 헤더 스타일 계산
+   * ----------------------------- */
+
   const headerBgClass = isMobile ? "bg-[#00000030]" : "";
-  const textColorClass = "text-black";
-  const logoFilter = "invert(0)";
+
+  const textColorClass = isMobile
+    ? "text-white"
+    : isLightBg
+    ? "text-black/70"
+    : "text-white";
+
+  const logoFilter = isMobile
+    ? "invert(1)"
+    : isLightBg
+    ? "invert(0)"
+    : "invert(1)";
 
   return (
     <header
@@ -106,74 +166,70 @@ const Hd: React.FC<HdProps> = ({ cls }) => {
         ${isMobile ? (showHeader ? "translate-y-0" : "-translate-y-full") : ""}`}
     >
       {/* 로고 */}
-      <Link to="/" className="hd-logo text-black">
-        <img src={logo} alt="로고" />
+      <Link to="/" className="hd-logo">
+        <img src={logo} alt="로고" style={{ filter: logoFilter }} />
       </Link>
 
       {/* 네비게이션 (데스크탑) */}
-      <nav className="hd-nav py-sm hidden lg:block z-50">
-        <ul className={`hd-nav-list flex gap-6 md:gap-8 lg:gap-10 transition-colors duration-300 text-sm ${textColorClass}`}>
+      <nav className="hd-nav py-sm hidden lg:block">
+        <ul
+          className={`hd-nav-list flex gap-6 md:gap-8 lg:gap-10 transition-colors duration-300 text-sm ${textColorClass}`}
+        >
           {loading ? (
             <li>Loading...</li>
           ) : (
-            navidata.map((item, idx) => {
-              const normalizedLink = (item.link || "").replace(/^\/+/, "").trim().toLowerCase();
-
-              return (
-                <li key={idx}>
-                  {normalizedLink === "contact" ? (
-                    <Link to="/contact" className="font-medium hover:opacity-60">
-                      {item.title}
-                    </Link>
-                  ) : (
-                    <a
-                      href={`#${normalizedLink}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleScrollNavigation(normalizedLink);
-                      }}
-                      className="font-medium hover:opacity-60"
-                    >
-                      {item.title}
-                    </a>
-                  )}
-                </li>
-              );
-            })
+            navidata.map((item, idx) => (
+              <li key={idx}>
+                {item.link === "contact" ? (
+                  <Link to="/contact" className="font-medium hover:opacity-60">
+                    {item.title}
+                  </Link>
+                ) : (
+                  <a
+                    href={`#${item.link}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleScrollNavigation(item.link);
+                    }}
+                    className="font-medium hover:opacity-60"
+                  >
+                    {item.title}
+                  </a>
+                )}
+              </li>
+            ))
           )}
         </ul>
       </nav>
 
       {/* 네비게이션 (모바일) */}
       <nav className="hd-nav py-sm block lg:hidden">
-        <ul className={`hd-nav-list gap-6 transition-colors duration-300 text-sm w-full flex justify-between ${textColorClass}`}>
+        <ul
+          className={`hd-nav-list gap-6 transition-colors duration-300 text-sm w-full flex justify-between ${textColorClass}`}
+        >
           {loading ? (
             <li>Loading...</li>
           ) : (
-            navidata.map((item, idx) => {
-              const normalizedLink = (item.link || "").replace(/^\/+/, "").trim().toLowerCase();
-
-              return (
-                <li key={idx}>
-                  {normalizedLink === "contact" ? (
-                    <Link to="/contact" className="font-medium hover:opacity-60">
-                      {item.title}
-                    </Link>
-                  ) : (
-                    <a
-                      href={`#${normalizedLink}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleScrollNavigation(normalizedLink);
-                      }}
-                      className="font-medium hover:opacity-60"
-                    >
-                      {item.title}
-                    </a>
-                  )}
-                </li>
-              );
-            })
+            navidata.map((item, idx) => (
+              <li key={idx}>
+                {item.link === "contact" ? (
+                  <Link to="/contact" className="font-medium hover:opacity-60">
+                    {item.title}
+                  </Link>
+                ) : (
+                  <a
+                    href={`#${item.link}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleScrollNavigation(item.link);
+                    }}
+                    className="font-medium hover:opacity-60"
+                  >
+                    {item.title}
+                  </a>
+                )}
+              </li>
+            ))
           )}
         </ul>
       </nav>

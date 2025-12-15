@@ -1,5 +1,5 @@
-import footerlogo from "../../assets/svg/footerLogo.svg";
-import footerlogo_m from "../../assets/svg/footerLogo_m.svg"
+import { ReactComponent as FooterLogo } from "../../assets/svg/footerLogo.svg";
+import { ReactComponent as FooterLogoMobile } from "../../assets/svg/footerLogo_m.svg";
 import instargram from "../../assets/svg/ico-instargram.svg";
 import youtube from "../../assets/svg/ico-youtube.svg";
 import blog from "../../assets/svg/ico-blog.svg";
@@ -14,7 +14,7 @@ export default function Ft() {
       <div className="hidden lg:flex items-center gap-sm w-full max-w-container-xl">
         <div className="flex flex-col justify-start w-full gap-md">
           <div className="text-white">
-            <img src={footerlogo} alt="로고" />
+             <FooterLogo className="w-full h-auto" />
           </div>
           <div className="flex flex-col justify-between h-full">
             <div className="flex text-sm gap-4">
@@ -70,8 +70,8 @@ export default function Ft() {
       {/* 모바일 */}
       <div className="flex lg:hidden items-center gap-sm w-full max-w-container-xl">
         <div className="flex flex-col justify-center w-full gap-md">
-          <div className="hd-logo w-full flex justify-center">
-            <img src={footerlogo_m} alt="로고"/>
+          <div className="hd-logo w-full flex justify-center text-white">
+            <FooterLogoMobile className="" />
           </div>
           <div className="flex space-x-4 justify-center gap-1">
             <a href="#" aria-label="Facebook" className={`transition-colors`}>
