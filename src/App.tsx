@@ -7,6 +7,8 @@ import BrandStory from "./pages/BrandStory";
 import CompanyInfo from "./pages/CompanyInfo";
 import CSR from "./pages/CSR";
 
+import AdminSolutionList from "./pages/AdminSolutionList";
+
 export default function App() {
   return (
     <Routes>
@@ -20,6 +22,7 @@ export default function App() {
         <Route path="/brandstory" element={<BrandStory />} />
         <Route path="/companyinfo" element={<CompanyInfo />} />
         <Route path="/csr" element={<CSR />} />
+        <Route path="/admin/solutions" element={<AdminSolutionList />} />
       </Route>
     </Routes>
   );

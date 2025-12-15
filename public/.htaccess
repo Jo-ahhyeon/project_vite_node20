@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /animora/
+
+# 실제 파일/폴더가 있으면 그대로
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# 나머지는 index.html로
+RewriteRule ^ index.html [L]
