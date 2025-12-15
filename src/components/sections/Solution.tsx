@@ -2,10 +2,10 @@ import { useState, useRef, FormEvent } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperCore } from "swiper";
 
-// JSON 데이터
+import { asset } from "@/utils/asset";
+
 import solution from "../../data/solution.json";
 
-// 커스텀
 import PaginationComponent from "../ui/Pagination";
 import Button from "../ui/Button";
 
@@ -22,7 +22,9 @@ interface FormData {
 }
 
 export default function Solution() {
-  const [formData, setFormData,] = useState<FormData>({
+  const API_BASE = import.meta.env.VITE_API_BASE as string;
+
+  const [formData, setFormData] = useState<FormData>({
     question1Answer: "",
     question2Text: "",
     name: "",
@@ -37,7 +39,6 @@ export default function Solution() {
   const totalSlides = solution.slides.length;
 
   // 핸들러
- 
   const handleQuestion1Answer = (answer: string) => {
     setFormData((prev) => ({ ...prev, question1Answer: answer }));
     swiperRef.current?.slideNext();
@@ -48,36 +49,59 @@ export default function Solution() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  // 🔥 여기만 바꿔줌: async + fetch 로 서버에 전송
+ const handleSubmit = async (e: FormEvent) => {
+  e.preventDefault();
 
-    if (!formData.name || !formData.contact || !formData.petName) {
-      alert("이름, 연락처, 반려동물 이름을 모두 입력해주세요.");
+  if (!formData.name || !formData.contact || !formData.petName) {
+    alert("이름, 연락처, 반려동물 이름을 모두 입력해주세요.");
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_BASE}/solution_save.php`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+      credentials: "include",
+    });
+
+    const text = await response.text();
+    console.log("📩 raw:", text);
+
+    let result: { success?: boolean; message?: string } | null = null;
+    try {
+      result = JSON.parse(text);
+    } catch {
+      alert("서버가 JSON이 아닌 응답을 보냈어. 콘솔 raw 확인!");
       return;
     }
 
-    console.log("📦 최종 제출 데이터(formData):", JSON.stringify(formData, null, 2));
-    console.table(formData); // 표 형태로 보기 좋게 출력
+    if (!response.ok || !result?.success) {
+      alert(result?.message || "서버 저장 중 오류가 발생했습니다.");
+      return;
+    }
 
+    // ✅ 성공
+    alert("전송 완료! 상담 요청이 접수되었습니다. 😊");
 
-    alert("전송 완료");
     setFormData({
-  question1Answer: "",
-  question2Text: "",
-  name: "",
-  contact: "",
-  petName: "",
-});
+      question1Answer: "",
+      question2Text: "",
+      name: "",
+      contact: "",
+      petName: "",
+    });
 
-// 🔥 첫 페이지로 이동
-swiperRef.current?.slideTo(0);
-
-// 🔥 페이지 번호도 1로 리셋
-setActiveIndex(1);
-  };
+    swiperRef.current?.slideTo(0);
+    setActiveIndex(1);
+  } catch (error) {
+    console.error("❌ 서버 통신 오류:", error);
+    alert("서버와 통신 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+  }
+};
 
   // Slide 렌더링 함수
- 
   const renderSlide = (slide: any) => {
     switch (slide.type) {
       case "select":
@@ -156,7 +180,12 @@ setActiveIndex(1);
                 ))}
               </div>
 
-              <Button type="submit" variant="primary" size="lg" className="p-6 whitespace-nowrap text-button">
+              <Button
+                type="submit"
+                variant="primary"
+                size="lg"
+                className="p-6 whitespace-nowrap text-button"
+              >
                 맞춤 예약 솔루션 받기
               </Button>
             </form>
@@ -169,9 +198,12 @@ setActiveIndex(1);
   };
 
   return (
-    <section className="relative w-full min-h-screen h-full text-center overflow-hidden">
-      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/img/solution_bg.jpg')" }}>
-      </div>
+    <div className="relative w-full min-h-screen lg:h-screen h-full text-center overflow-hidden">
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url('${asset("img/solution_bg.jpg")}')`  }}
+      ></div>
+
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6">
         <h2 className="text-title font-semibold text-white leading-snug text-center mb-4">
           맞춤형 예약 솔루션을 <br /> 상담 받아보세요!
@@ -180,7 +212,7 @@ setActiveIndex(1);
         <div className="flex flex-col items-center justify-center w-full max-w-container-md">
           <Swiper
             onSwiper={(swiper) => (swiperRef.current = swiper)}
-            onSlideChange={(s) => setActiveIndex(s.activeIndex + 1)}  // ← 핵심
+            onSlideChange={(s) => setActiveIndex(s.activeIndex + 1)}
             slidesPerView={1}
             allowTouchMove={false}
             autoHeight={true}
@@ -198,14 +230,15 @@ setActiveIndex(1);
             totalPages={totalSlides}
             onPageChange={(page) => {
               if (page > currentPage) return;
-              swiperRef.current?.slideTo(page - 1);}}
+              swiperRef.current?.slideTo(page - 1);
+            }}
           />
         </div>
       </div>
-      <div className="w-full absolute bottom-0">
-        <FullpageFt/>
+
+      <div className="absolute bottom-0 w-full">
+        <FullpageFt />
       </div>
-      
-    </section>
+    </div>
   );
 }
