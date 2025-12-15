@@ -1,0 +1,79 @@
+@charset "UTF-8";
+html, body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (min-width: 1080px) {
+  .panel {
+    height: 100vh;
+  }
+}
+@media (max-width: 1023px) {
+  section {
+    height: auto;
+  }
+  .hd-logo {
+    width: 150px;
+    height: auto;
+  }
+}
+.partner-track {
+  display: flex;
+  gap: 10rem;
+  width: max-content;
+  animation: scroll-left 90s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* 두 배 채웠으므로 -50% 이동 */
+  }
+}
+@media (max-width: 1023px) {
+  .partner-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+}
+@keyframes rolling-slow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.animate-rolling-slow {
+  animation: rolling-slow 60s linear infinite;
+}
+
+.solution_bg {
+  background: url(/img/solution_bg.jpg) no-repeat center;
+}
+
+.eco_bg {
+  background: url(/img/eco.jpg) no-repeat center;
+}
+
+.service_bg {
+  background: url(/img/service.jpg) no-repeat center;
+}
+
+@media (max-width: 1080px) {
+  .mobile-input-box {
+    width: 100%;
+    aspect-ratio: 0.8/0.6; /* 🔥 모바일에서 세로로 긴 박스 */
+    padding: 20px !important;
+  }
+  .mobile-input-box::placeholder {
+    white-space: pre-line; /* 자동 줄바꿈 */
+    line-height: 1.4;
+    opacity: 0.7;
+  }
+}

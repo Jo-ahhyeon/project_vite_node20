@@ -19,13 +19,13 @@ export default {
         "main-primary": "var(--main-primary)",
         "serve-color": "var(--serve-color)",
         "serve-color2": "var(--serve-color2)",
-        "black": "var(--text-black)",
-        "white": "var(--text-white)",
       },
       flex: {
         '2': '2 2 0%',
       },
       spacing: {
+        "3xl": "var(--spacing-3xl)",
+        xxl: "var(--spacing-xxl)",
         xl: "var(--spacing-xl)",
         lg: "var(--spacing-lg)",
         md: "var(--spacing-md)",
@@ -38,7 +38,7 @@ export default {
         wide: '1px',
         wider: '2px',
         widest: '4px',
-        hero: '6px', // 너가 원하는 값으로 커스텀
+        hero: '6px',
       },
       borderRadius: {
         30: "var(--radius-30)",
@@ -53,6 +53,7 @@ export default {
         xl: ["var(--typo-xl-size)", { lineHeight: "var(--typo-xl-lineheight)" }],
         lg: ["var(--typo-lg-size)", { lineHeight: "var(--typo-lg-lineheight)" }],
         sm: ["var(--typo-sm-size)", { lineHeight: "var(--typo-sm-lineheight)" }],
+        body: ["var(--typo-body-size)", { lineHeight: "var(--typo-body-lineheight)" }],
         button: ["var(--typo-button-size)", { lineHeight: "var(--typo-button-lineheight)" }],
       },
       fontFamily: {

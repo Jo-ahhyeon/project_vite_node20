@@ -8,11 +8,17 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
-build
+dist/
+animora/
+build/
 dist-ssr
 *.local
-promotion
+
+public/api/
+public/admin/
+public/auth/
+
+myAdmin/
 
 .env
 .env.*.local
@@ -24,8 +30,6 @@ promotion
 .env.production
 .env.staging
 .env.development
-
-
 
 # Editor directories and files
 .vscode/*

@@ -20,10 +20,13 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
-  },
-  "include": ["src"],
-  "paths": {
+    "noUncheckedSideEffectImports": true,
+
+    /* ✅ Alias */
+    "baseUrl": ".",
+    "paths": {
       "@/*": ["src/*"]
     }
-  }
+  },
+  "include": ["src"]
+}
