@@ -10,19 +10,19 @@ const About = () => {
     {
       titleEn: "Brand story",
       titleKo: "브랜드 스토리",
-      img: "/img/brandstoryimg.jpg",
+      img: "img/brandstoryimg.jpg",
       link: "/brandstory",
     },
     {
       titleEn: "About Animora",
       titleKo: "애니모라 소개",
-      img: "/img/companyInfo.jpg",
+      img: "img/companyInfo.jpg",
       link: "/companyinfo",
     },
     {
       titleEn: "Corporate Social Responsibility",
       titleKo: "사회적 책임",
-      img: "/img/csr.jpg",
+      img: "img/csr.jpg",
       link: "/csr",
     },
   ];
@@ -47,12 +47,10 @@ const About = () => {
       scrollTrigger: {
         trigger: "#about-section",
         start: "top 80%",
-        toggleActions: "play none none none",
+        toggleActions: "restart none restart none",
       },
     });
   });
-
-  // 중요!!! 이미지 로드 후 refresh
   const handleLoad = () => {
     ScrollTrigger.refresh();
   };
@@ -66,8 +64,8 @@ const About = () => {
 }, []);
 
   return (
-    <div id="about-section" className="w-full h-full">
-      <div className="container1650 mx-auto grid grid-cols-1 md:grid-cols-3">
+    <div id="about-section" className="h-screen">
+      <div className="container1650 mx-auto grid grid-cols-1 md:grid-cols-3 lg:h-screen">
         {cards.map((card, index) => (
           <div
             key={index}

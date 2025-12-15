@@ -1,17 +1,13 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-
 import "swiper/css";
-
 import heroVideo from "../../assets/hero.mp4";
 import heroimg from "../../../public/img/heroimg.jpg";
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-screen bg-black overflow-hidden">
-
-      {/* 🔥 블랙 반투명 오버레이 */}
-      <div className="absolute inset-0 bg-black/40 z-[5]"></div>
+    <div className="relative w-full h-screen bg-black overflow-hidden">
+      <div className="absolute inset-0 bg-black/20 z-[5]"></div>
 
       <Swiper
         modules={[Autoplay]}
@@ -32,6 +28,8 @@ export default function Hero() {
             muted
             loop
             playsInline
+            preload="metadata"
+            poster={heroimg}
           />
           <h2 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-title z-10">
             Animora
@@ -47,8 +45,6 @@ export default function Hero() {
           />
         </SwiperSlide>
       </Swiper>
-
-      
-    </section>
+    </div>
   );
 }

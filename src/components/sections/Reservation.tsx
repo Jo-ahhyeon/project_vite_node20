@@ -19,6 +19,7 @@ useGSAP(() => {
     scrollTrigger: {
       trigger: "#underline-target",
       start: "top bottom",
+      toggleActions: "restart none restart none",
       once: false,
     },
   });
@@ -38,7 +39,7 @@ useGSAP(() => {
 });
 
   return (
-    <section className="relative w-full flex flex-col items-center justify-center text-center overflow-hidden gap-[100px] lg:gap-[150px] min-h-screen lg:h-screen">
+    <div className="relative w-full flex flex-col items-center justify-center text-center overflow-hidden gap-[100px] lg:gap-[150px] h-screen bg-white">
       <div className="absolute top-0 left-0 w-full h-screen flex items-center justify-center pointer-events-none overflow-hidden">
         <div className="rolling-text whitespace-nowrap animate-rolling-slow">
           <span className="mx-10 opacity-10 tracking-tight leading-none font-bold text-[60px] sm:text-[120px] lg:text-[250px]">
@@ -89,6 +90,6 @@ useGSAP(() => {
         </Button>
       </div>
       
-    </section>
+    </div>
   );
 }

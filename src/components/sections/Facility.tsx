@@ -15,16 +15,16 @@ type Facility = {
 };
 
 const facilities: Facility[] = [
-  { id: 1, img: "/img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 2, img: "/img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 3, img: "/img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 4, img: "/img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 5, img: "/img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 6, img: "/img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 7, img: "/img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 8, img: "/img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 9, img: "/img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 10, img: "/img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 1, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 2, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 3, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 4, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 5, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 6, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 7, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 8, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 9, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 10, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
 ];
 
 const groupByFour = facilities.reduce<Facility[][]>((acc, _, i) => {
@@ -47,13 +47,11 @@ export default function Facility() {
   const desktopCurrentPage = Math.floor(activeIndex / 4) + 1;
 
   return (
-    <section className="flex flex-col justify-center items-center py-20 bg-white min-h-screen lg:h-screen">
+    <div className="flex flex-col justify-center items-center min-h-screen lg:h-screen py-20 bg-white">
       <h2 className="text-sub font-bold mb-12">한눈에 보는 호텔 시설 안내</h2>
 
       <div className="w-full max-w-container-xl mx-auto">
-
-        {/* === 모바일 Swiper === */}
-        <div className="md:hidden px-4">
+        <div className="lg:hidden px-4">
           <Swiper
             onSwiper={(swiper) => {
               mobileSwiperRef.current = swiper;
@@ -68,7 +66,7 @@ export default function Facility() {
                   {group.map((item) => (
                     <div key={item.id}>
                       <img
-                        src={item.img}
+                        src={`${import.meta.env.BASE_URL}${item.img}`}
                         className="w-full h-[150px] object-cover"
                         alt={item.title}
                       />
@@ -91,7 +89,7 @@ export default function Facility() {
         </div>
 
         {/* === 데스크탑 Swiper === */}
-        <div className="hidden md:block">
+        <div className="hidden lg:block overflow-hidden">
           <Swiper
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
@@ -99,6 +97,11 @@ export default function Facility() {
             onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
             modules={[Pagination, Autoplay]}
             slidesPerView={4}
+            autoplay={{
+            delay: 3500,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
             spaceBetween={20}
             pagination={false}
             breakpoints={{
@@ -116,7 +119,7 @@ export default function Facility() {
               <SwiperSlide key={item.id}>
                 <div>
                   <img
-                    src={item.img}
+                    src={`${import.meta.env.BASE_URL}${item.img}`}
                     className="w-full aspect-square object-cover"
                     alt={item.title}
                   />
@@ -127,8 +130,6 @@ export default function Facility() {
               </SwiperSlide>
             ))}
           </Swiper>
-
-          {/* 🔥 데스크탑 페이지네이션 (내가 직접 추가해서 완성!) */}
           <PaginationComponent
             currentPage={desktopCurrentPage}
             totalPages={desktopTotalPages}
@@ -139,6 +140,6 @@ export default function Facility() {
         </div>
 
       </div>
-    </section>
+    </div>
   );
 }
