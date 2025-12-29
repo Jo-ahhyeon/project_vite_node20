@@ -21,9 +21,9 @@ const OVERVIEW = {
   heading:
     "Animora는 단순한 위탁 서비스가 아닙니다.\n프리미엄급 시설과 전문 관리로 반려동물에게 최상의 경험을 선사합니다.",
   description: [
-    "Animora는 [설립년도]년에 설립되어 다양한 산업 분야에서 신뢰받는 파트너로 자리 잡았습니다.",
-    "우리는 혁신적인 아이디어와 기술력을 바탕으로 고객의 성공적인 성장을 지원하며, 지속 가능한 미래를 만들어가고 있습니다.",
-    "우리의 핵심 가치는 [핵심 가치 3가지, 예: 신뢰, 창의성, 지속 가능성]으로, 이를 통해 더 나은 세상을 만들어가는 데 기여하고자 합니다.",
+    "Animora는 현대인의 라이프스타일 변화에 맞춰, 반려동물을 안전하게 맡길 수 있는 프리미엄 돌봄 서비스를 제공합니다.",
+    "체계적인 관리 프로세스와 전문 인력을 통해 호텔 케어부터 방문 돌봄까지 일관된 품질을 유지합니다.",
+    "우리는 보호자의 신뢰를 최우선 가치로 삼아, 반려동물 돌봄의 새로운 기준을 제시합니다.",
   ],
   imagePc: "img/companyimg.jpg",
   imageMo: "img/companyimg_m.jpg",
@@ -60,10 +60,10 @@ const PROMISES = [
 const CI_CONTENT = {
   heading: "우리의 비전과 가치를 담아낸 디자인, 아이덴티티를 확인하세요.",
   description: [
-    "[기업명]의 CI는 우리의 철학과 가치를 시각적으로 표현한 결과물입니다. 로고는 곡선 형태를 통해 유연성과 창의성을 상징하며,",
-    "컬러는 신뢰와 지속 가능성을 나타냅니다. 주 컬러인 파란색은 안정성과 신뢰를, 초록색은 자연과 지속 가능성을 상징합니다.",
-    "또한, 모던한 산세리프 폰트를 사용하여 젊고 트렌디한 이미지를 강조했습니다.",
-    "이 모든 요소는 [기업명]이 지향하는 비전과 정체성을 담고 있으며, 고객과의 소통과 신뢰를 위한 중요한 역할을 합니다.",
+    "Animora의 CI는 반려동물과 보호자 사이의 신뢰와 애정을 시각적으로 표현한 브랜드 아이덴티티입니다.",
+    "부드러운 로고 곡선과 절제된 컬러 조합은 프리미엄 돌봄 서비스의 안정감과 따뜻한 감성을 전달합니다.",
+    "딥 그린 컬러는 신뢰와 안정성을, 뉴트럴 톤의 서브 컬러는 편안함과 부드러운 이미지를 상징하며,",
+    "Animora만의 차분하고 고급스러운 브랜드 무드를 완성합니다.",
   ],
 };
 
@@ -76,7 +76,8 @@ const CORPORATE_COLORS = [
 const Partner = {
   heading: "함께 성장하는 신뢰의 파트너",
   description: [
-    "Animora는 [설립년도]년에 설립되어 다양한 산업 분야에서 신뢰받는 파트너로 자리 잡았습니다.",
+    "Animora는 반려동물의 안전과 신뢰를 최우선 가치로 삼아, 다양한 파트너사와 지속 가능한 협업 관계를 구축하고 있습니다.",
+    "호텔형 돌봄 서비스부터 방문 케어까지 축적된 운영 경험을 바탕으로, 브랜드와 서비스의 시너지를 만들어갑니다.",
   ],
 };
 
@@ -154,7 +155,7 @@ export default function CompanyInfo() {
 
   return (
     <section className="relavive max-w-container-xl mx-auto flex flex-col items-end">
-      <h2 className="pt-3xl pb-[100px] w-full justify-start max-w-container-md px-[10px] lg:px-0">
+      <h2 className="pt-3xl pb-xl w-full justify-start max-w-container-md px-[10px] lg:px-0">
         <img ref={titleRef} src={Aboutsvg} alt="What's the ANIMORA" />
       </h2>
       <div className="w-full flex justify-between lg:py-xl">
@@ -172,7 +173,7 @@ export default function CompanyInfo() {
         
         <div className="flex-1 flex flex-col items-start max-w-container-md">
           
-          {/* 🟢 Overview 섹션 */}
+          {/* Overview 섹션 */}
           <section
             id="overview"
             className="w-full overview flex flex-col lg:gap-[60px] mb-xl px-[10px] lg:px-0 gap-md"
@@ -203,7 +204,7 @@ export default function CompanyInfo() {
             </div>
           </section>
 
-          {/* 🟠 Promise 섹션 */}
+          {/* Promise 섹션 */}
           <section
             id="promise"
             className="w-full promise flex flex-col lg:gap-[120px] py-xl px-[10px] lg:px-0 gap-md"
@@ -232,11 +233,11 @@ export default function CompanyInfo() {
           <div className="hidden md:block rounded-t-50 overflow-hidden my-xl">
             <img src={asset("img/companyimg2.jpg")} alt="Animora 시설 이미지" />
           </div>
-          <div className="md:hidden w-full h-auto object-cover px-[10px] my-xl flex justify-center">
+          <div className="md:hidden w-full h-auto object-cover my-xl flex justify-center">
             <img src={asset("img/companyimg2_m.jpg")} alt="Animora 시설 이미지" />
           </div>
 
-          {/* 🔵 CI 섹션 */}
+          {/* CI 섹션 */}
           <section
             id="ci"
             className="w-full ci flex flex-col lg:gap-[60px] py-xl px-[10px] lg:px-0 gap-md"
@@ -264,7 +265,7 @@ export default function CompanyInfo() {
             </div>
           </section>
 
-          {/* 🟣 Colors 섹션 */}
+          {/* Colors 섹션 */}
           <section
             id="colors"
             className="w-full flex flex-col lg:gap-[60px] py-xl px-[10px] lg:px-0 gap-md"
@@ -300,7 +301,7 @@ export default function CompanyInfo() {
               ))}
             </p>
 
-            {/* ✅ 공통 파트너 로고 컴포넌트 */}
+            {/* 공통 파트너 로고 컴포넌트 */}
             <PartnerLogos variant="grid" />
           </section>
 

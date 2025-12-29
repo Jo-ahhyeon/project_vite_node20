@@ -11,6 +11,7 @@ import Button from "../ui/Button";
 
 import "swiper/css";
 import FullpageFt from "../layout/FullpageFt";
+import SuccessModal from "@/components/common/SuccessModal";
 
 // 타입 정의
 interface FormData {
@@ -32,76 +33,111 @@ export default function Solution() {
     petName: "",
   });
 
+  const [successOpen, setSuccessOpen] = useState(false);
+  const formatPhoneNumber = (value: string) => {
+  const numbers = value.replace(/[^0-9]/g, "");
+
+  if (numbers.length < 4) return numbers;
+  if (numbers.length < 8) return `${numbers.slice(0, 3)}-${numbers.slice(3)}`;
+    return `${numbers.slice(0, 3)}-${numbers.slice(3, 7)}-${numbers.slice(7, 11)}`;
+  };
+
+  const stripHyphen = (value: string) => value.replace(/-/g, "");
+  const contactNumberOnly = stripHyphen(formData.contact);
+  const isContactValid = contactNumberOnly.length === 11;
+
+  const canSubmit =
+    formData.name.trim() &&
+    formData.petName.trim() &&
+    isContactValid;
+
   const swiperRef = useRef<SwiperCore | null>(null);
   const [currentPage, setActiveIndex] = useState(1);
+  const [contactTouched, setContactTouched] = useState(false);
 
-  // JSON 기반 슬라이드 수
   const totalSlides = solution.slides.length;
 
-  // 핸들러
   const handleQuestion1Answer = (answer: string) => {
     setFormData((prev) => ({ ...prev, question1Answer: answer }));
     swiperRef.current?.slideNext();
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const { name, value } = e.target;
+
+  if (name === "contact") {
+    const formatted = formatPhoneNumber(value);
+      setFormData((prev) => ({ ...prev, contact: formatted }));
+      setContactTouched(true);
+      return;
+    }
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // 🔥 여기만 바꿔줌: async + fetch 로 서버에 전송
- const handleSubmit = async (e: FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
 
-  if (!formData.name || !formData.contact || !formData.petName) {
-    alert("이름, 연락처, 반려동물 이름을 모두 입력해주세요.");
-    return;
-  }
+    if (!formData.name || !formData.petName) {
+      alert("이름, 반려동물 이름을 모두 입력해주세요.");
+      return;
+    }
 
-  try {
-    const response = await fetch(`${API_BASE}/solution_save.php`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-      credentials: "include",
-    });
+    if (!isContactValid) {
+      setContactTouched(true);
+      return;
+    }
 
-    const text = await response.text();
-    console.log("📩 raw:", text);
+    const submitData = {
+      ...formData,
+      contact: stripHyphen(formData.contact),
+    };
 
-    let result: { success?: boolean; message?: string } | null = null;
     try {
-      result = JSON.parse(text);
-    } catch {
-      alert("서버가 JSON이 아닌 응답을 보냈어. 콘솔 raw 확인!");
-      return;
+      const response = await fetch(`${API_BASE}/solution_save.php`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(submitData), // ✅ submitData 전송
+        credentials: "include",
+      });
+
+      const text = await response.text();
+      console.log("📩 raw:", text);
+
+      let result: { success?: boolean; message?: string } | null = null;
+      try {
+        result = JSON.parse(text);
+      } catch {
+        alert("서버가 JSON이 아닌 응답을 보냈어. 콘솔 raw 확인!");
+        return;
+      }
+
+      if (!response.ok || !result?.success) {
+        alert(result?.message || "서버 저장 중 오류가 발생했습니다.");
+        return;
+      }
+      
+      setSuccessOpen(true);
+
+      // alert("전송 완료! 상담 요청이 접수되었습니다. 😊");
+
+      setFormData({
+        question1Answer: "",
+        question2Text: "",
+        name: "",
+        contact: "",
+        petName: "",
+      });
+
+      setContactTouched(false);
+
+      swiperRef.current?.slideTo(0);
+      setActiveIndex(1);
+    } catch (error) {
+      console.error("❌ 서버 통신 오류:", error);
+      alert("서버와 통신 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
     }
+  };
 
-    if (!response.ok || !result?.success) {
-      alert(result?.message || "서버 저장 중 오류가 발생했습니다.");
-      return;
-    }
-
-    // ✅ 성공
-    alert("전송 완료! 상담 요청이 접수되었습니다. 😊");
-
-    setFormData({
-      question1Answer: "",
-      question2Text: "",
-      name: "",
-      contact: "",
-      petName: "",
-    });
-
-    swiperRef.current?.slideTo(0);
-    setActiveIndex(1);
-  } catch (error) {
-    console.error("❌ 서버 통신 오류:", error);
-    alert("서버와 통신 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
-  }
-};
-
-  // Slide 렌더링 함수
   const renderSlide = (slide: any) => {
     switch (slide.type) {
       case "select":
@@ -168,28 +204,46 @@ export default function Solution() {
               className="flex flex-col lg:flex-row w-full max-w-container-md gap-4"
             >
               <div className="flex flex-col lg:flex-row w-full gap-4">
-                {slide.fields.map((field: any) => (
-                  <input
-                    key={field.name}
-                    name={field.name}
-                    placeholder={field.placeholder}
-                    value={formData[field.name as keyof FormData]}
-                    onChange={handleInputChange}
-                    className="bg-[#FFFFFF40] p-6 rounded-50 text-sm w-full text-[14px] touch-manipulation"
-                  />
-                ))}
-              </div>
+                {slide.fields.map((field: any) => {
+                  const isContact = field.name === "contact";
+                  const showError = isContact && contactTouched && !isContactValid;
 
-              <Button
-                type="submit"
-                variant="primary"
-                size="lg"
-                className="p-6 whitespace-nowrap text-button"
-              >
-                맞춤 예약 솔루션 받기
-              </Button>
-            </form>
-          </div>
+            return (
+              <div key={field.name} className="w-full">
+                <input
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  value={formData[field.name as keyof FormData]}
+                  onChange={handleInputChange}
+                  onBlur={() => isContact && setContactTouched(true)}
+                  inputMode={isContact ? "numeric" : undefined}
+                  maxLength={isContact ? 13 : undefined} // ✅ 추가
+                  className={`
+                    bg-[#FFFFFF40] p-6 rounded-50 text-sm w-full text-[14px] touch-manipulation
+                    border
+                    ${showError ? "border-red-500" : "border-transparent"}
+                  `}
+                />
+              </div>
+            );
+          })}
+        </div>
+
+        <Button
+          type="submit"
+          variant="primary"
+          size="lg"
+          disabled={!canSubmit}
+          className={`
+            p-6 whitespace-nowrap text-button
+            ${!canSubmit ? "opacity-50 cursor-not-allowed" : ""}
+          `}
+        >
+          맞춤 예약 솔루션 받기
+        </Button>
+
+      </form>
+    </div>
         );
 
       default:
@@ -239,6 +293,18 @@ export default function Solution() {
       <div className="absolute bottom-0 w-full">
         <FullpageFt />
       </div>
+      <SuccessModal
+      open={successOpen}
+      onClose={() => setSuccessOpen(false)}
+      title="맞춤 솔루션이 접수되었습니다!"
+      desc={
+        <>
+          입력해주신 정보를 바탕으로
+          <br />
+          최적의 케어 솔루션을 안내드릴게요.
+        </>
+      }
+    />
     </div>
   );
 }

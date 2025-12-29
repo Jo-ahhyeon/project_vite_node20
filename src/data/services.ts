@@ -30,7 +30,7 @@ export const PROMO_CARDS: PromoCardItem[] = [
   {
     id: "service",
     title: "호텔 & 방문 서비스",
-    desc: "쾌적하고 안전한 공간, 맞춤형 놀이와 돌봄…\n최고의 케어를 경험할 수 있습니다.",
+    desc: "쾌적하고 안전한 공간, 맞춤형 놀이와 돌봄,\n호텔과 집 어디서든 최고의 케어를 경험할 수 있습니다.",
     cta: "서비스 소개 바로가기",
     href: "/service",
     image: "img/service.jpg",

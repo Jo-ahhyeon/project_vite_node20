@@ -5,7 +5,6 @@ import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-// 🔥 커스텀 페이지네이션
 import PaginationComponent from "../ui/Pagination";
 
 type Facility = {
@@ -16,15 +15,15 @@ type Facility = {
 
 const facilities: Facility[] = [
   { id: 1, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 2, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 3, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 4, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 5, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 2, img: "img/facility2.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 3, img: "img/facility3.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 4, img: "img/facility4.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 5, img: "img/facility5.jpg", title: "한눈에 보는 호텔 시설 안내" },
   { id: 6, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 7, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 8, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 9, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
-  { id: 10, img: "img/facility1.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 7, img: "img/facility2.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 8, img: "img/facility3.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 9, img: "img/facility4.jpg", title: "한눈에 보는 호텔 시설 안내" },
+  { id: 10, img: "img/facility5.jpg", title: "한눈에 보는 호텔 시설 안내" },
 ];
 
 const groupByFour = facilities.reduce<Facility[][]>((acc, _, i) => {

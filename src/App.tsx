@@ -9,22 +9,28 @@ import CSR from "./pages/CSR";
 
 import AdminSolutionList from "./pages/AdminSolutionList";
 
+import AnalyticsTracker from "./components/AnalyticsTracker";
+
 export default function App() {
   return (
-    <Routes>
-      {/* HOME — 풀페이지 스크롤 */}
-      <Route element={<HomeLayout />}>
-        <Route path="/" element={<Home />} />
-      </Route>
+     <>
+      <AnalyticsTracker />
 
-      {/* 일반 스크롤 페이지 */}
-      <Route element={<Layout />}>
-        <Route path="/brandstory" element={<BrandStory />} />
-        <Route path="/companyinfo" element={<CompanyInfo />} />
-        <Route path="/csr" element={<CSR />} />
-        <Route path="/admin/solutions" element={<AdminSolutionList />} />
-      </Route>
-    </Routes>
+      <Routes>
+        {/* HOME — 풀페이지 스크롤 */}
+        <Route element={<HomeLayout />}>
+          <Route path="/" element={<Home />} />
+        </Route>
+
+        {/* 일반 스크롤 페이지 */}
+        <Route element={<Layout />}>
+          <Route path="/brandstory" element={<BrandStory />} />
+          <Route path="/companyinfo" element={<CompanyInfo />} />
+          <Route path="/csr" element={<CSR />} />
+          <Route path="/admin/solutions" element={<AdminSolutionList />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 

@@ -64,3 +64,14 @@
 .service_bg {
   background: url(/img/service.jpg) no-repeat center;
 }
+
+/* iOS Safari date input fix */
+input[type="date"] {
+  background-color: #fff;
+  color: #111;
+}
+
+input[type="date"]::-webkit-date-and-time-value {
+  color: #111;
+  text-align: left;
+}

@@ -8,3 +8,9 @@ RewriteRule ^ - [L]
 
 # 나머지는 index.html로
 RewriteRule ^ index.html [L]
+
+<IfModule mod_headers.c>
+
+</IfModule>
+
+

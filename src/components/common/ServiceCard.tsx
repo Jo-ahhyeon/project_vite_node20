@@ -22,7 +22,7 @@ export default function PromoCard({ item }: { item: PromoCardItem }) {
         <>
           <div
             className="w-[275px] h-auto lg:w-[400px] lg:h-[450px] overflow-hidden"
-            style={{ borderRadius: "50% / 200px 200px 0 0" }}
+            style={{ borderRadius: "50% / 50% 50% 0 0" }}
           >
             <img src={`${asset(item.image)}`} alt={item.title} className="w-full h-full object-cover" />
           </div>

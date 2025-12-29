@@ -12,7 +12,7 @@ export default function Hero() {
       <Swiper
         modules={[Autoplay]}
         autoplay={{
-          delay: 4000,
+          delay: 6000,
           disableOnInteraction: false,
         }}
         loop={true}
@@ -22,7 +22,7 @@ export default function Hero() {
         {/* 🔥 슬라이드 1 — 비디오 */}
         <SwiperSlide>
           <video
-            className="w-full h-full object-cover opacity-70"
+            className="w-full h-full object-cover opacity-90"
             src={heroVideo}
             autoPlay
             muted
