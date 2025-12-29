@@ -48,15 +48,5 @@
 - Layout / Section / Common 구조로 역할 기준 컴포넌트 설계
 - 재사용 가능한 UI는 `common`, `ui`로 분리하여 유지보수성 향상
 
-## 📂 Project Structure
-src/
- ├─ components/
- │   ├─ layout/        # Header / Footer / Layout
- │   ├─ sections/      # Home 섹션 단위 컴포넌트
- │   ├─ common/        # 재사용 UI 컴포넌트
- │   └─ ui/            # 버튼, 링크 등 단일 UI
- ├─ pages/             # Route 단위 페이지
- ├─ data/              # 정적 데이터 (partners, services 등)
- ├─ utils/             # 공통 유틸 함수
- └─ styles/            # 전역 스타일
-
+## 📂 컴포넌트 설계도 및 페이지 구조
+![component](https://github.com/user-attachments/assets/5941d95c-2868-4da0-a1ce-9779284de2ce)
