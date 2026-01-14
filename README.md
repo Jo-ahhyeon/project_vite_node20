@@ -22,3 +22,34 @@
 - TailwindCSS + SCSS
 - React Router v7
 - Swiper, Axios
+<<<<<<< HEAD
+=======
+
+# 4️⃣ 핵심 기능 요약 (Core Features)
+## ✨ Core Features
+
+### 맞춤 솔루션 (CRUD)
+- 사용자 신청 폼 → PHP API(JSON) → DB 저장
+- 관리자 페이지에서 조회 / 수정 / 삭제
+- PHP 세션 기반 관리자 인증
+- 신청 시 카카오톡 ‘나에게 보내기’ 알림 연동
+
+# 5️⃣ 문제 해결 경험 (Issues & Solutions)
+## 🧩 Issues & Solutions
+### 1. 서브 디렉토리 SPA 배포 시 정적 리소스 경로 문제
+- base / basename / asset 경로 통합 처리
+- `/animora` 기준 절대 경로 전략 적용
+### 2. SPA 새로고침 시 404 오류
+- Apache `.htaccess` fallback 설정으로 해결
+### 3. React ↔ PHP API CORS / Preflight 이슈
+- OPTIONS 요청 분리 처리
+- CORS 헤더 명시적 설정
+
+## 🧩 Component Architecture
+- Route 단위 페이지(`pages`)와 UI 컴포넌트(`components`)를 분리
+- Layout / Section / Common 구조로 역할 기준 컴포넌트 설계
+- 재사용 가능한 UI는 `common`, `ui`로 분리하여 유지보수성 향상
+
+## 📂 컴포넌트 설계도 및 페이지 구조
+![component](https://github.com/user-attachments/assets/5941d95c-2868-4da0-a1ce-9779284de2ce)
+>>>>>>> 7dd325a23397e34106be3843c8caa3ea0cfc3bab
